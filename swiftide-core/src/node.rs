@@ -247,7 +247,7 @@ pub enum EmbeddedField {
     Chunk,
     /// Embeddable created from Metadata.
     /// String stores Metadata name.
-    #[strum(to_string = "Metadata: {0}")]
+    #[strum(to_string = "Metadata_{0}")]
     Metadata(String),
 }
 
