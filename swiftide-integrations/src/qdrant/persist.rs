@@ -114,6 +114,6 @@ impl Persist for Qdrant {
 
 impl Qdrant {
     fn vector_fields(&self) -> HashSet<&EmbeddedField> {
-        self.vectors.keys().collect::<HashSet<_>>()
+        self.vectors.keys().chain(self.sparse_vectors.keys()).collect::<HashSet<_>>()
     }
 }
