@@ -95,6 +95,7 @@ impl Persist for Qdrant {
         };
 
         tracing::debug!("Storing batch of {} nodes", points.len());
+        tracing::debug!("Batch store: {:?}", points);
 
         let result = self
             .client
@@ -105,8 +106,10 @@ impl Persist for Qdrant {
             .await;
 
         if result.is_ok() {
+            tracing::debug!("Batch store successful");
             IndexingStream::iter(nodes.into_iter().map(Ok))
         } else {
+            tracing::debug!("Batch store failed: {:?}", result);
             vec![Err(result.unwrap_err().into())].into()
         }
     }
